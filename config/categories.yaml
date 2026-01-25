@@ -1,0 +1,80 @@
+# ChronoScribe Document Categories
+# These are the default categories for document classification
+
+categories:
+  # Document types by format
+  - id: sketch
+    name: Sketch
+    description: Hand-drawn diagrams, designs, or illustrations
+    keywords: [diagram, drawing, design, illustration, blueprint, schematic]
+
+  - id: notes
+    name: Notes
+    description: Handwritten or typed notes and memos
+    keywords: [memo, note, reminder, todo, list, jot]
+
+  - id: typed
+    name: Typed Document
+    description: Primarily typed/printed text documents
+    keywords: [letter, report, document, form, typed]
+
+  - id: mixed
+    name: Mixed Content
+    description: Documents with both handwritten and typed content
+    keywords: [annotated, marked up, filled form, annotations]
+
+  # Document types by purpose
+  - id: invention
+    name: Invention/Idea
+    description: Invention sketches, patent ideas, concepts
+    keywords: [patent, invention, idea, concept, prototype, innovation]
+
+  - id: journal
+    name: Journal Entry
+    description: Personal diary or journal entries
+    keywords: [diary, journal, personal, reflection, daily]
+
+  - id: letter
+    name: Correspondence
+    description: Letters, cards, or written correspondence
+    keywords: [letter, card, correspondence, greeting, mail]
+
+  - id: financial
+    name: Financial
+    description: Financial documents, receipts, invoices
+    keywords: [receipt, invoice, budget, expense, tax, payment]
+
+  - id: medical
+    name: Medical
+    description: Medical records, prescriptions, health notes
+    keywords: [medical, health, prescription, doctor, diagnosis, patient]
+
+  - id: legal
+    name: Legal
+    description: Legal documents, contracts, agreements
+    keywords: [contract, agreement, legal, court, witness, notary]
+
+  - id: recipe
+    name: Recipe
+    description: Food recipes and cooking instructions
+    keywords: [recipe, cooking, ingredients, bake, food, kitchen]
+
+  - id: meeting
+    name: Meeting Notes
+    description: Notes from meetings or discussions
+    keywords: [meeting, agenda, minutes, discussion, action items]
+
+  - id: project
+    name: Project Document
+    description: Project planning, tracking, or documentation
+    keywords: [project, timeline, milestone, deliverable, task, plan]
+
+  - id: research
+    name: Research
+    description: Research notes, citations, findings
+    keywords: [research, study, findings, citation, reference, paper]
+
+  - id: other
+    name: Other
+    description: Documents that don't fit other categories
+    keywords: []

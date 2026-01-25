@@ -1,0 +1,94 @@
+# ChronoScribe Configuration
+# Copy this to ~/ChronoScribe/config/config.yaml and customize
+
+# Paths (use ~ for home directory)
+paths:
+  inbox: ~/ChronoScribe/inbox
+  processing: ~/ChronoScribe/processing
+  archive: ~/ChronoScribe/archive
+  clarifications: ~/ChronoScribe/clarifications
+  data: ~/ChronoScribe/data
+  logs: ~/ChronoScribe/logs
+
+# File watcher settings
+watcher:
+  recursive: false
+  debounce_seconds: 2.0
+  stability_checks: 3
+  poll_interval: 1.0
+  
+  supported_formats:
+    - .png
+    - .jpg
+    - .jpeg
+    - .tiff
+    - .tif
+    - .bmp
+    - .webp
+    - .heic
+    - .pdf
+  
+  ignore_patterns:
+    - ".*"
+    - "*.tmp"
+    - "*.temp"
+    - "~*"
+    - ".DS_Store"
+    - "._*"
+
+# Image preprocessing
+preprocessing:
+  target_dpi: 300
+  max_skew_angle: 15.0
+  contrast_enhancement: true
+  noise_reduction: true
+  auto_crop: true
+  output_format: PNG
+
+# Transcription providers (in priority order)
+transcription:
+  providers:
+    - name: azure
+      enabled: true
+      priority: 1
+      free_tier_limit: 5000  # Per month
+    
+    - name: google
+      enabled: true
+      priority: 2
+      free_tier_limit: 1000  # Per month
+    
+    - name: openai
+      enabled: true
+      priority: 3
+      # No free tier - pay per use
+    
+    - name: ollama
+      enabled: false
+      priority: 4
+      model: llava
+      endpoint: http://localhost:11434
+
+# Analysis settings
+analysis:
+  provider: anthropic
+  model: claude-sonnet-4-20250514
+  
+# Clarification settings
+clarification:
+  confidence_threshold: 0.7
+  max_questions_per_document: 5
+  auto_accept_days: 7
+  critical_threshold: 0.5
+
+# Search settings
+search:
+  results_per_page: 20
+  snippet_length: 200
+
+# Logging
+logging:
+  level: INFO
+  file: ~/ChronoScribe/logs/chronoscribe.log
+  max_size_mb: 10
+  backup_count: 5

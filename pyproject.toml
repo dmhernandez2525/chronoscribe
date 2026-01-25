@@ -1,0 +1,133 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chronoscribe"
+version = "0.1.0"
+description = "Transform handwritten legacy documents into searchable digital archives"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "Daniel Hernandez"}
+]
+keywords = ["ocr", "handwriting", "document", "archive", "transcription", "timeline"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Text Processing :: General",
+    "Topic :: Multimedia :: Graphics :: Capture :: Scanners",
+]
+
+dependencies = [
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "watchdog>=3.0.0",
+    "pillow>=10.0.0",
+    "opencv-python>=4.8.0",
+    "PyMuPDF>=1.23.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+    "httpx>=0.25.0",
+    "python-dateutil>=2.8.0",
+    "dateparser>=1.2.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+]
+
+[project.optional-dependencies]
+azure = [
+    "azure-cognitiveservices-vision-computervision>=0.9.0",
+    "azure-core>=1.29.0",
+]
+google = [
+    "google-cloud-vision>=3.5.0",
+]
+openai = [
+    "openai>=1.6.0",
+]
+anthropic = [
+    "anthropic>=0.8.0",
+]
+ollama = [
+    "ollama>=0.1.0",
+]
+all-providers = [
+    "chronoscribe[azure,google,openai,anthropic,ollama]",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "pytest-asyncio>=0.21.0",
+    "responses>=0.24.0",
+    "ruff>=0.1.0",
+    "mypy>=1.7.0",
+    "pre-commit>=3.6.0",
+]
+
+[project.scripts]
+chronoscribe = "chronoscribe.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/dmhernandez2525/chronoscribe"
+Repository = "https://github.com/dmhernandez2525/chronoscribe"
+Documentation = "https://github.com/dmhernandez2525/chronoscribe#readme"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-v --cov=chronoscribe --cov-report=term-missing"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG",    # flake8-unused-arguments
+    "SIM",    # flake8-simplify
+]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+    "B008",   # do not perform function calls in argument defaults
+]
+
+[tool.ruff.isort]
+known-first-party = ["chronoscribe"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "cv2.*",
+    "fitz.*",
+    "watchdog.*",
+    "dateparser.*",
+]
+ignore_missing_imports = true
