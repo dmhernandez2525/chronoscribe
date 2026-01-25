@@ -1,13 +1,11 @@
-import { 
-  FileText, 
-  Search, 
-  Clock, 
-  Shield, 
-  MessageSquareQuestion, 
+import {
+  FileText,
+  Search,
+  Clock,
+  Shield,
+  HelpCircle,
   FolderTree,
-  Terminal,
   Sparkles,
-  CheckCircle,
   Github
 } from 'lucide-react'
 
@@ -84,8 +82,8 @@ function LandingPage() {
       <section id="features" className="container mx-auto px-6 py-20">
         <h2 className="text-3xl font-bold text-center mb-12">Why ChronoScribe?</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <FeatureCard 
-            icon={<MessageSquareQuestion className="h-8 w-8 text-primary-500" />}
+          <FeatureCard
+            icon={<HelpCircle className="h-8 w-8 text-primary-500" />}
             title="Clarification System"
             description="When AI is uncertain, it asks you specific questions instead of guessing. No more proofreading entire documents."
           />
