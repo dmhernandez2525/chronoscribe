@@ -1,0 +1,58 @@
+name: chronoscribe
+
+# Chronoscribe - Docker Compose
+# Run with: docker-compose up -d
+
+services:
+  chronoscribe:
+    build: .
+    container_name: chronoscribe
+    ports:
+      - "8001:8001"
+    volumes:
+      # Watch folder for new documents
+      - ./data/watch:/app/data/watch
+      # Processed documents output
+      - ./data/processed:/app/data/processed
+      # Output transcriptions and timelines
+      - ./data/output:/app/data/output
+      # Configuration (read-only)
+      - ./config:/app/config:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+      # Transcription provider (azure, google, openai, anthropic, ollama)
+      - CHRONOSCRIBE_PROVIDER=${CHRONOSCRIBE_PROVIDER:-openai}
+      # API keys (set in .env file or environment)
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - AZURE_VISION_KEY=${AZURE_VISION_KEY:-}
+      - AZURE_VISION_ENDPOINT=${AZURE_VISION_ENDPOINT:-}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/config/google-credentials.json
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Optional: Ollama for local LLM transcription
+  ollama:
+    image: ollama/ollama:latest
+    container_name: chronoscribe-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    profiles:
+      - local-llm
+    restart: unless-stopped
+
+volumes:
+  ollama-data:
+    driver: local
+
+networks:
+  default:
+    name: chronoscribe-network
+    driver: bridge
