@@ -50,4 +50,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
     CMD curl -f http://localhost:8001/health || exit 1
 
 # Start the CLI in watch mode
-CMD ["python", "-m", "chronoscribe", "watch", "--port", "8001"]
+CMD ["python", "-m", "chronoscribe", "watch"]
